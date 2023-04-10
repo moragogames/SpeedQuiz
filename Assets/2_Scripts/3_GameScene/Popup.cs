@@ -28,8 +28,8 @@ public class Popup : MonoBehaviour
 
     private void Update()
     {
-        myScoreText.text = "³ªÀÇ Á¡¼ö : " + User.Instance.myScore.ToString();
-        correctCount.text = "¸ÂÃáÄûÁî°¹¼ö : " + User.Instance.correctCount.ToString();
+        //myScoreText.text = "³ªÀÇ Á¡¼ö : " + User.Instance.myScore.ToString();
+        //correctCount.text = "¸ÂÃáÄûÁî°¹¼ö : " + User.Instance.correctCount.ToString();
     }
 
     public void SetResultPanel(bool _r)

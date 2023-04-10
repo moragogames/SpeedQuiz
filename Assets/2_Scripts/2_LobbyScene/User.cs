@@ -30,7 +30,7 @@ public class User : MonoBehaviour
 
     #endregion
 
-    public QuizCatagoty quizCatagoty;
+    public QuizCategoty quizCatagoty;
 
     public int correctCount;
     public int myScore;

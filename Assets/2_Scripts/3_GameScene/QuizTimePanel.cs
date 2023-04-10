@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class QuizTimePanel : MonoBehaviour
 {
     [SerializeField] Image progressBar;
+    [SerializeField] Popup popup;
     public float maxTime = 10;
 
     private void Start()
@@ -24,7 +25,6 @@ public class QuizTimePanel : MonoBehaviour
     //퀴즈를 풀었을때 호출
     public void Answered(bool _b)
     {
-        
         StopCoroutine("ProgressTimer");
     }
 
@@ -43,7 +43,7 @@ public class QuizTimePanel : MonoBehaviour
         }
         progressBar.fillAmount = 0; // 
         QuizMgr.Instance.TimeOver(); // 
-
+        popup.SetGameOverPanel(true);
     }
 
     

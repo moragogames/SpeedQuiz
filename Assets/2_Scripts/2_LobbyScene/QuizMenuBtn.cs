@@ -8,64 +8,56 @@ using UnityEngine.UI;
 public class QuizMenuBtn : MonoBehaviour
 {
     [SerializeField] TMP_Text quizMenuText;
-    [SerializeField] QuizCatagoty quizCatagoty;
+    [SerializeField] QuizCategoty quizCategoty;
     Button btn;
 
     private void Start()
     {
         quizMenuText = GetComponentInChildren<TMP_Text>();
-        quizCatagoty = (QuizCatagoty)GetComponent<RectTransform>().GetSiblingIndex();
+        quizCategoty = (QuizCategoty)GetComponent<RectTransform>().GetSiblingIndex();
         btn = GetComponent<Button>();   
 
         btn.onClick.AddListener(OnClickedBtn);
         
 
-        switch (quizCatagoty)
+        switch (quizCategoty)
         {
-            case QuizCatagoty.actor:
+            case QuizCategoty.actor:
                 quizMenuText.text = "배우";
                 break;
-            case QuizCatagoty.drama:
-                quizMenuText.text = "드라마";
+            case QuizCategoty.boy:
+                quizMenuText.text = "남자아이돌";
                 break;
-            case QuizCatagoty.singer:
+            case QuizCategoty.girl:
+                quizMenuText.text = "여자아이돌";
+                break;
+            case QuizCategoty.singer:
                 quizMenuText.text = "가수";
                 break;
-            case QuizCatagoty.movie:
-                quizMenuText.text = "영화";
+            case QuizCategoty.come:
+                quizMenuText.text = "개그맨";
                 break;
-            case QuizCatagoty.youTuber:
-                quizMenuText.text = "유튜버";
+            case QuizCategoty.trot:
+                quizMenuText.text = "트로트가수";
                 break;
-            case QuizCatagoty.soccer:
-                quizMenuText.text = "축구선수";
-                break;
-            case QuizCatagoty.Country:
-                quizMenuText.text = "나라";
-                break;
-            case QuizCatagoty.baseball:
-                quizMenuText.text = "야구선수";
-                break;
+            
         }
     }
     public void OnClickedBtn()
     {
 
-        User.Instance.quizCatagoty = quizCatagoty;
+        User.Instance.quizCatagoty = quizCategoty;
         SceneManager.LoadScene("3_GameScene");
     }
 
 }
 
-public enum QuizCatagoty
+public enum QuizCategoty
 {
     actor,
-    drama,
+    boy,
+    girl,
     singer,
-    movie,
-    youTuber,
-    soccer,
-    Country,
-    baseball,
-    count
+    come,
+    trot,
 }

@@ -21,9 +21,9 @@ public class QuizMgr : MonoBehaviour
     }
     #endregion
 
-    [SerializeField] QuizData[] quizDatas;
+    [SerializeField] QuizData[] quizDatas;//(급수정)
     [SerializeField] public  QuizCanvas quizCanvas;
-    [SerializeField] QuizData curQuizData;
+    [SerializeField] QuizData curQuizData;//(급수정)
     [SerializeField] QuizTimePanel quizTimePanel;
     [SerializeField] Popup popup;
 
@@ -33,15 +33,16 @@ public class QuizMgr : MonoBehaviour
 
 
     bool isAnswered = false;
+   
     void Start()
     {
-        Debug.Log("제출되야될 퀴즈 : " + User.Instance.quizCatagoty);
+        //Debug.Log("제출되야될 퀴즈 : " + User.Instance.quizCatagoty);
         QuestionCount = 1;
         popup.SetResultPanel(false);
         popup.SetReadyPanel(true);
 
-        User.Instance.correctCount = 0;
-        User.Instance.myScore = 0;
+        //User.Instance.correctCount = 0;
+        //User.Instance.myScore = 0;
 
         SetQuizList();
     }
@@ -55,23 +56,43 @@ public class QuizMgr : MonoBehaviour
         Answered(false);
         popup.gameOverPanel.SetActive(true);
     }
-    public void ShowQuiz()
+    public void StartQuiz() // 퀴즈 시작
+    {
+     
+        StartCoroutine("WaitQuizStart");
+    }
+   
+    public void NextQuiz()
+    {
+        QuestionCount++;
+        StartCoroutine("WaitNextQuiz");
+    }
+
+    public void ReStartQuiz()
+    {
+        User.Instance.correctCount = 0;
+        User.Instance.myScore = 0;
+        StartQuiz();
+    }
+  
+   IEnumerator WaitNextQuiz()
+    {
+        yield return new WaitForSeconds(0.5f);
+        StartQuiz();
+    }
+    IEnumerator WaitQuizStart()
     {
         popup.SetReadyPanel(false);
+        popup.SetGameOverPanel(false);
+        popup.SetResultPanel(false);
         isAnswered = false;
+        yield return new WaitForSeconds(0.5f);
         QuizRandom();
-        quizCanvas.ShowQuiz(curQuizData);
+        quizCanvas.CreatQuiz(curQuizData);
     }
 
-        List<QuizData> quizRandomList = new List<QuizData>();
+    List<QuizData> quizRandomList = new List<QuizData>();
 
-    public void SetQuizList()
-    {
-        for (int i = 0; i < quizDatas.Length; i++)
-        {
-            quizRandomList.Add(quizDatas[i]);
-        }
-    }
     public void QuizRandom()
     {
         int rand = Random.Range(0, quizRandomList.Count);
@@ -81,6 +102,13 @@ public class QuizMgr : MonoBehaviour
         if (quizRandomList.Count == 0)
         {
             SetQuizList();
+        }
+    }
+    public void SetQuizList()
+    {
+        for (int i = 0; i < quizDatas.Length; i++)
+        {
+            quizRandomList.Add(quizDatas[i]);
         }
     }
     public void Answer(string correctWord)
@@ -96,42 +124,28 @@ public class QuizMgr : MonoBehaviour
         {
             popup.SetResultPanel(true); // 결과 팝업
             quizCanvas.Answered(result); // 
-            User.Instance.myScore += 100;
+            //User.Instance.myScore += 100;
             User.Instance.correctCount++;
             Debug.Log("정답");
-            
         }
         else
         {
             Debug.Log("땡");
         }
-        Answered(result);
+        //Answered(result);
 
     }
 
     public  void Answered(bool _result)
     {
         quizCanvas.Answered(_result);
-        //StartCoroutine("WaitNext");
     }
 
-    IEnumerator WaitNext()
-    {
-        popup.SetResultPanel(false);
-        yield return new WaitForSeconds(1f);
-        //Debug.Log("코드지연후 실행");
-        QuestionCount++;
-        ShowQuiz();
-    }
-    public void NextQuiz()
-    {
-        StartCoroutine("WaitNext");
-    }
    
 }
 
 [System.Serializable]
-public class QuizData
+public class QuizDatas
 {
     public int QuizIndex = 0;
 

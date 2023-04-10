@@ -22,13 +22,13 @@ public class QuizCanvas : MonoBehaviour
     int answerIdx = 0;
     bool isClicked = false;
 
-    
-    // 퀴즈 보여주기
-    public void ShowQuiz(QuizData qData)
+
+    //퀴즈 보여주기
+    public void CreatQuiz(QuizData qData) //
     {
         answerIdx = 0;
 
-        for (int i = 0; i < answerObjectList.Count; i++)  // 오브젝트 풀로 수정해보기
+        for (int i = 0; i < answerObjectList.Count; i++)  
         {
             //answerObjectList[i].SetAnswer("");
             AnswerObject aObject = answerObjectList[i];
@@ -37,13 +37,14 @@ public class QuizCanvas : MonoBehaviour
             i--;
         }
 
-        questionImage.sprite = qData.quizImage; // 퀴즈 이미지
-        quizTimePanel.QuizTimerStart(); // 퀴즈 타이머 스타트
-        
+        questionImage.sprite = qData.sprite; // 퀴즈 이미지 //
+        //questionImage.sprite = qData.quizImage; // 퀴즈 이미지 //
+
         // 문제단어 제출하기
         List<string> wordList = new List<string>();
 
-        wordList.AddRange(qData.words);
+        //wordList.AddRange(WordData);
+       // wordList.AddRange(qData.words);
         int idx = 0;
         for (int i = 0; i < wordList.Count; i++)
         {
@@ -74,8 +75,10 @@ public class QuizCanvas : MonoBehaviour
             cloneAnswerObject.SetAnswer("");
         }
 
-        
+
     }
+
+
 
     // 퀴즈 시간 
     public void Answered(bool _b)
