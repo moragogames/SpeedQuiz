@@ -15,8 +15,13 @@ public class WordBtn : MonoBehaviour
         Wordbtn = GetComponentInChildren<Button>();
         Wordbtn.onClick.AddListener(OnClickedWordBtn);
     }
-    string word;
-    public void SetWordBtn(string _w)
+    char word;
+    //public void SetWordBtn(string _w)
+    //{
+    //    word = _w;
+    //    wordText.text = _w.ToString();
+    //}
+    public void SetWordBtn(char _w)
     {
         word = _w;
         wordText.text = _w.ToString();

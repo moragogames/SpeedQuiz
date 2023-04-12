@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class UITop : MonoBehaviour
 {
     [SerializeField] Popup popup;
+    [SerializeField] QuizTimePanel quizTimePanel;
     
     //[SerializeField] GameObject UIShop;
     //[SerializeField] GameObject BackBtn;
@@ -31,6 +32,8 @@ public class UITop : MonoBehaviour
     public void SetUIShop()
     {
         popup.SetShopPanel(true);
+        quizTimePanel.PopUpTimeStop(true);
+
     }
     public void SetBackBtn()
     {

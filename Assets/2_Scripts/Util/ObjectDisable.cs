@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class ObjectDisable : MonoBehaviour
 {
+    [SerializeField] QuizTimePanel quizTimePanel;
 
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         gameObject.SetActive(false);
     }
+
+
 
 
 }

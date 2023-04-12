@@ -1,34 +1,32 @@
-{
-  "QuizMenuData": [
-    {
-      "quizMenu": "actor",
-      "name": "배우",
-      "thum": "actor"
-    },
-    {
-      "quizMenu": "girl",
-      "name": "걸그룹",
-      "thum": "girl"
-    },
-    {
-      "quizMenu": "boy",
-      "name": "보이그룹",
-      "thum": "boy"
-    },
-    {
-      "quizMenu": "singer",
-      "name": "가수",
-      "thum": "singer"
-    },
-    {
-      "quizMenu": "trot",
-      "name": "트로트가수",
-      "thum": "trot"
-    },
-    {
-      "quizMenu": "come",
-      "name": "개그맨",
-      "thum": "come"
-    }
-  ]
-}
+[
+  {
+    "quizCategory": "actor",
+    "name": "배우",
+    "thum": "actor"
+  },
+  {
+    "quizCategory": "girl",
+    "name": "걸그룹",
+    "thum": "girl"
+  },
+  {
+    "quizCategory": "boy",
+    "name": "보이그룹",
+    "thum": "boy"
+  },
+  {
+    "quizCategory": "singer",
+    "name": "가수",
+    "thum": "singer"
+  },
+  {
+    "quizCategory": "trot",
+    "name": "트로트가수",
+    "thum": "trot"
+  },
+  {
+    "quizCategory": "come",
+    "name": "개그맨",
+    "thum": "come"
+  }
+]

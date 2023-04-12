@@ -15,6 +15,8 @@ public class Popup : MonoBehaviour
     public TMP_Text myScoreText;
     public TMP_Text correctCount;
 
+
+
     private void Start()
     {
         resultPanel.SetActive(false);
@@ -28,8 +30,8 @@ public class Popup : MonoBehaviour
 
     private void Update()
     {
-        //myScoreText.text = "³ªÀÇ Á¡¼ö : " + User.Instance.myScore.ToString();
-        //correctCount.text = "¸ÂÃáÄûÁî°¹¼ö : " + User.Instance.correctCount.ToString();
+        myScoreText.text = "³ªÀÇ Á¡¼ö : " + User.Instance.myScore.ToString();
+        correctCount.text = "¸ÂÃáÄûÁî°¹¼ö : " + User.Instance.correctCount.ToString();
     }
 
     public void SetResultPanel(bool _r)
@@ -43,6 +45,7 @@ public class Popup : MonoBehaviour
     public void SetShopPanel(bool _s)
     {
         shopPanel.SetActive(_s);
+       
     }
     public void SetHintOnePanel()
     {

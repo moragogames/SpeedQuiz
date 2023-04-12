@@ -22,6 +22,8 @@ public class DataMgr : MonoBehaviour
     }
     #endregion
 
+    public string[] words;
+    
     public Dictionary<QuizCategoty, List<QuizData>> quizDataDic = new Dictionary<QuizCategoty, List<QuizData>> ();
     public Dictionary<QuizCategoty, QuizMenuData> quizMenuDic = new Dictionary<QuizCategoty, QuizMenuData> ();
 
@@ -29,20 +31,12 @@ public class DataMgr : MonoBehaviour
     public List<QuizData> quizDataList = new List<QuizData> ();
     public List<QuizMenuData> quizMenuDataList = new List<QuizMenuData> ();
 
-    public List<WordData> wordDataList = new List<WordData> ();
 #endif
 
     private void Start()
     {
-
-        //JSONArray jArray = JSONArray.Parse(Resources.Load<TextAsset>("JSON/QuizData").text);
-
-        TextAsset quizAsset = Resources.Load<TextAsset>("JSON/QuizData");
-        JSONObject quizObj = JSONObject.Parse(quizAsset.text);
-
-
-        JSONArray quizArray = quizObj["QuizData"].Array;
-
+        // 퀴즈데이터
+        JSONArray quizArray = JSONArray.Parse(Resources.Load<TextAsset>("JSON/QuizData").text);
 
         for (int i = 0; i < quizArray.Length; i++)
         {
@@ -53,48 +47,67 @@ public class DataMgr : MonoBehaviour
             qData.quizCategoty = System.Enum.Parse<QuizCategoty>(quizArray[i].Obj.GetString("quizCategory"));
             qData.sprite = Resources.Load<Sprite>("Images/AnswerImages/" + qData.idx);
 
+            if (!quizDataDic.ContainsKey(qData.quizCategoty))
+            {
+                quizDataDic.Add(qData.quizCategoty, new List<QuizData>());
+            }
+
             quizDataDic[qData.quizCategoty].Add(qData); // 궁금합니다 
 
             quizDataList.Add(qData);
         }
 
 
-        TextAsset wordAsset = Resources.Load<TextAsset>("JSON/WordData");
-        JSONObject wordObj = JSONObject.Parse(wordAsset.text);
+        // 메뉴데이터
+        JSONArray menuArray = JSONArray.Parse(Resources.Load<TextAsset>("JSON/quizMenuData").text);
 
-        JSONArray wordArray = wordObj["WordData"].Array;
-
-        for (int i = 0; i < wordArray.Length; i++)
+        for (int i = 0; i < menuArray.Length; i++)
         {
-            WordData wData = new WordData();
+            QuizMenuData mData = new QuizMenuData();
 
-            wData.word = wordArray[i].Obj.GetString("Word").Split('/');
+            mData.name = menuArray[i].Obj.GetString("name");
+            mData.thum = Resources.Load<Sprite>("Images/thum/" + menuArray[i].Obj.GetString("thum"));
+            mData.quizCategoty = System.Enum.Parse<QuizCategoty>(menuArray[i].Obj.GetString("quizCategory"));
 
-            wordDataList.Add(wData);
+            quizMenuDic.Add(mData.quizCategoty, mData);
+
+            quizMenuDataList.Add(mData);
         }
 
 
+        // 단어데이터
+        JSONArray wordArray = JSONArray.Parse(Resources.Load<TextAsset>("JSON/WordData").text);
+        words = wordArray.ToString().Split('/');
+        //words = wordArray.ToString().Split('/');
+        //for (int i = 0; i < wordArray.Length; i++)
+        //{
+        //    WordData wData = new WordData();
+
+        //    wData.word = wordArray[i].Obj.GetString("word").Split('/');
+
+        //    wordDataList.Add(wData);
+        //}
     }
 
 
-    //public List<QuizData> GetQuizDatas(QuizCategoty quizCategoty)
-    //{
-    //    if (quiz)
-    //    {
+    public List<QuizData> GetQuizDatas(QuizCategoty quizCategoty)
+    {
+        if (!quizDataDic.ContainsKey(quizCategoty))
+        {
+            return null;
+        }
+        return quizDataDic[quizCategoty];
+    }
+    public QuizMenuData GetQuizMenuData(QuizCategoty quizCategoty)
+    {
 
-    //    }
-    //}
-    //public QuizData GetAQuizData(string _key)
-    //{
-    //    for (int i = 0; i < quizDataList.Count; i++)
-    //    {
-    //        if (quizDataList[i].Equals(_key))
-    //        {
-    //            return quizDataList[i];
-    //        }
-    //    }
-    //    return null;
-    //}
+        if (!quizMenuDic.ContainsKey(quizCategoty))
+        {
+            return null;
+        }
+        return quizMenuDic[quizCategoty];
+    }
+
 
 }
 
@@ -110,16 +123,9 @@ public class QuizData
 [System.Serializable]
 public class QuizMenuData
 {
-    public Sprite thum;
     public QuizCategoty quizCategoty;
+    public string name;
+    public Sprite thum;
 
 }
-
-[System.Serializable]
-public class WordData
-{
-    public string[] word;
-}
-
-
 

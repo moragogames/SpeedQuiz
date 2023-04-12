@@ -27,6 +27,7 @@ public class QuizMgr : MonoBehaviour
     [SerializeField] QuizTimePanel quizTimePanel;
     [SerializeField] Popup popup;
 
+    float beforeTime;
 
     public TMP_Text QuestionCountText;
     public int QuestionCount;
@@ -36,14 +37,14 @@ public class QuizMgr : MonoBehaviour
    
     void Start()
     {
-        //Debug.Log("Á¦ÃâµÇ¾ßµÉ ÄûÁî : " + User.Instance.quizCatagoty);
+        Debug.Log("Á¦ÃâµÇ¾ßµÉ ÄûÁî : " + User.Instance.quizCatagoty);
         QuestionCount = 1;
         popup.SetResultPanel(false);
         popup.SetReadyPanel(true);
 
-        //User.Instance.correctCount = 0;
-        //User.Instance.myScore = 0;
-
+        User.Instance.correctCount = 0;
+        User.Instance.myScore = 0;
+        quizDatas = DataMgr.Instance.GetQuizDatas(User.Instance.quizCatagoty).ToArray();
         SetQuizList();
     }
     private void Update()
@@ -66,6 +67,7 @@ public class QuizMgr : MonoBehaviour
     {
         QuestionCount++;
         StartCoroutine("WaitNextQuiz");
+       
     }
 
     public void ReStartQuiz()
@@ -88,6 +90,7 @@ public class QuizMgr : MonoBehaviour
         isAnswered = false;
         yield return new WaitForSeconds(0.5f);
         QuizRandom();
+        quizTimePanel.QuizTimerStart();
         quizCanvas.CreatQuiz(curQuizData);
     }
 
@@ -124,13 +127,17 @@ public class QuizMgr : MonoBehaviour
         {
             popup.SetResultPanel(true); // °á°ú ÆË¾÷
             quizCanvas.Answered(result); // 
-            //User.Instance.myScore += 100;
+            User.Instance.myScore += 100;
             User.Instance.correctCount++;
+            SoundMgr.Instance.PlaySound(SFXType.rigjt);
+
             Debug.Log("Á¤´ä");
         }
         else
         {
             Debug.Log("¶¯");
+            SoundMgr.Instance.PlaySound(SFXType.wrong);
+
         }
         //Answered(result);
 
@@ -140,18 +147,30 @@ public class QuizMgr : MonoBehaviour
     {
         quizCanvas.Answered(_result);
     }
+    public void SetGameStop()
+    {
+        if (Time.timeScale > 0)
+        {
+            beforeTime = Time.timeScale;
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = beforeTime;
+        }
+    }
 
    
 }
 
-[System.Serializable]
-public class QuizDatas
-{
-    public int QuizIndex = 0;
+//[System.Serializable]
+//public class QuizDatas
+//{
+//    public int QuizIndex = 0;
 
-    public Sprite quizImage;
+//    public Sprite quizImage;
 
-    public string correct;
-    public string[] words;
+//    public string correct;
+//    public string[] words;
 
-}
+//}

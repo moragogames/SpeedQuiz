@@ -37,21 +37,34 @@ public class QuizCanvas : MonoBehaviour
             i--;
         }
 
+        // 정답단어 복사해서 넣기
+        char[] correctArr = qData.correct.ToCharArray();
+        for (int i = 0; i < correctArr.Length; i++)
+        {
+            AnswerObject cloneAnswerObject = Instantiate(answerObjectPrefab, answerObjectTr).GetComponent<AnswerObject>();
+            answerObjectList.Add(cloneAnswerObject);
+            cloneAnswerObject.SetAnswer("");
+        }
         questionImage.sprite = qData.sprite; // 퀴즈 이미지 //
         //questionImage.sprite = qData.quizImage; // 퀴즈 이미지 //
 
         // 문제단어 제출하기
+        //List<string> wordList = new List<string>();
         List<string> wordList = new List<string>();
+        List<char> correct = new List<char>();
 
-        //wordList.AddRange(WordData);
-       // wordList.AddRange(qData.words);
+        wordList.AddRange(DataMgr.Instance.words);
+        correct.AddRange(correctArr);
+       
         int idx = 0;
-        for (int i = 0; i < wordList.Count; i++)
+        for (int i = 0; i < wordBtns.Length; i++)
         {
-            int rand = Random.Range(0, wordList.Count);
-            wordBtns[idx].SetWordBtn(wordList[rand]);
-            wordList.Remove(wordList[rand]);
-            i--; // 인덱스의 역활??
+            //int rand = Random.Range(0, correct.Count);
+            wordBtns[idx].SetWordBtn(correct[idx]);
+            //wordBtns[idx].SetWordBtn(wordList[rand]);
+            //wordList.Remove(wordList[rand]);
+            //correct.Remove(correct[rand]);
+            //i--; // 인덱스의 역활??
             idx++;
         }
         #region 문제원본
@@ -66,14 +79,6 @@ public class QuizCanvas : MonoBehaviour
         //}
         #endregion
 
-        // 정답단어 복사해서 넣기
-        char[] correctArr = qData.correct.ToCharArray();
-        for (int i = 0; i < correctArr.Length; i++)
-        {
-            AnswerObject cloneAnswerObject = Instantiate(answerObjectPrefab, answerObjectTr).GetComponent<AnswerObject>();
-            answerObjectList.Add(cloneAnswerObject);
-            cloneAnswerObject.SetAnswer("");
-        }
 
 
     }
@@ -93,7 +98,7 @@ public class QuizCanvas : MonoBehaviour
         {
             return;
         }
-
+        SoundMgr.Instance.PlaySound(SFXType.click);
         answerObjectList[answerIdx].SetAnswer(answerWord);
 
         answerIdx++;

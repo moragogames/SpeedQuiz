@@ -1261,7 +1261,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &180954096
@@ -1522,6 +1522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 989d9c8ce388acc4e9ae3cbc8e2e4130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  quizTimePanel: {fileID: 2142532083}
 --- !u!1 &234346280
 GameObject:
   m_ObjectHideFlags: 0
@@ -2970,7 +2971,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &649931606
@@ -6745,7 +6746,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ea758f14126811b4b99ddc87769f996e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6131ba4f21c90664c962ec8f936bf5a9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7031,60 +7032,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   quizDatas:
-  - QuizIndex: 0
-    quizImage: {fileID: 21300000, guid: 8efd27f38d59fd74abf4c70d60138ad5, type: 3}
+  - idx: 
+    sprite: {fileID: 0}
+    quizCategoty: 0
     correct: "\uAD8C\uB098\uB77C"
-    words:
-    - "\uAD8C"
-    - "\uB098"
-    - "\uB77C"
-    - "\uC774"
-    - "\uC0C1"
-    - "\uBBFC"
-    - "\uC7A5"
-    - "\uACBD"
-    - "\uAD6D"
-    - "\uACE0"
-    - "\uC740"
-    - "\uCD94"
-  - QuizIndex: 1
-    quizImage: {fileID: 21300000, guid: b71bc1937d2c36c45a16d94e9ee27e93, type: 3}
+  - idx: 
+    sprite: {fileID: 0}
+    quizCategoty: 0
     correct: "\uD604\uBE48"
-    words:
-    - "\uD604"
-    - "\uBE48"
-    - "\uB77C"
-    - "\uC774"
-    - "\uC0C1"
-    - "\uBBFC"
-    - "\uC7A5"
-    - "\uACBD"
-    - "\uAD6D"
-    - "\uACE0"
-    - "\uC740"
-    - "\uCD94"
-  - QuizIndex: 2
-    quizImage: {fileID: 21300000, guid: ea758f14126811b4b99ddc87769f996e, type: 3}
+  - idx: 
+    sprite: {fileID: 0}
+    quizCategoty: 0
     correct: "\uC1A1\uC911\uAE30"
-    words:
-    - "\uC1A1"
-    - "\uC911"
-    - "\uAE30"
-    - "\uC774"
-    - "\uC0C1"
-    - "\uBBFC"
-    - "\uC7A5"
-    - "\uACBD"
-    - "\uAD6D"
-    - "\uACE0"
-    - "\uC740"
-    - "\uCD94"
   quizCanvas: {fileID: 96863787}
   curQuizData:
-    QuizIndex: 0
-    quizImage: {fileID: 0}
+    idx: 
+    sprite: {fileID: 0}
+    quizCategoty: 0
     correct: 
-    words: []
   quizTimePanel: {fileID: 2142532083}
   popup: {fileID: 987685871}
   QuestionCountText: {fileID: 582767114}
@@ -7198,6 +7163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 989d9c8ce388acc4e9ae3cbc8e2e4130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  quizTimePanel: {fileID: 2142532083}
 --- !u!95 &1456588950
 Animator:
   serializedVersion: 4
@@ -7582,6 +7548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 989d9c8ce388acc4e9ae3cbc8e2e4130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  quizTimePanel: {fileID: 2142532083}
 --- !u!1 &1624440088
 GameObject:
   m_ObjectHideFlags: 0
@@ -8969,6 +8936,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popup: {fileID: 987685871}
+  quizTimePanel: {fileID: 2142532083}
   questionCountText: {fileID: 37215595}
   heartCountText: {fileID: 705650704}
 --- !u!1 &1812169711
@@ -9096,7 +9064,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1812169714

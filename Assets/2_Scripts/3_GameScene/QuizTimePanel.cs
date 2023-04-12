@@ -28,6 +28,13 @@ public class QuizTimePanel : MonoBehaviour
         StopCoroutine("ProgressTimer");
     }
 
+    public void PopUpTimeStop(bool _p)
+    {
+        StopCoroutine("ProgressTimer");
+    }
+    
+
+
     //시간안에 퀴즈를 풀면 코루틴 종료
     IEnumerator ProgressTimer()
     {
