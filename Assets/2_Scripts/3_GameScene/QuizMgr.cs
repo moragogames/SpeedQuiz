@@ -21,9 +21,9 @@ public class QuizMgr : MonoBehaviour
     }
     #endregion
 
-    [SerializeField] QuizData[] quizDatas;//(급수정)
+    [SerializeField] QuizData[] quizDatas;
     [SerializeField] public  QuizCanvas quizCanvas;
-    [SerializeField] QuizData curQuizData;//(급수정)
+    [SerializeField] public QuizData curQuizData;
     [SerializeField] QuizTimePanel quizTimePanel;
     [SerializeField] Popup popup;
 
@@ -32,20 +32,28 @@ public class QuizMgr : MonoBehaviour
     public TMP_Text QuestionCountText;
     public int QuestionCount;
 
-
+    
     bool isAnswered = false;
    
     void Start()
     {
         Debug.Log("제출되야될 퀴즈 : " + User.Instance.quizCatagoty);
         QuestionCount = 1;
-        popup.SetResultPanel(false);
         popup.SetReadyPanel(true);
+        
 
         User.Instance.correctCount = 0;
         User.Instance.myScore = 0;
         quizDatas = DataMgr.Instance.GetQuizDatas(User.Instance.quizCatagoty).ToArray();
         SetQuizList();
+    }
+
+    void InitQuiz()
+    {
+        popup.SetReadyPanel(false);
+        popup.SetGameOverPanel(false);
+        popup.SetResultPanel(false);
+        popup.panelBack.SetActive(false);
     }
     private void Update()
     {
@@ -59,7 +67,9 @@ public class QuizMgr : MonoBehaviour
     }
     public void StartQuiz() // 퀴즈 시작
     {
-     
+        popup.isHintOneClicked = false;
+        popup.isHintAllClicked = false;
+
         StartCoroutine("WaitQuizStart");
     }
    
@@ -70,13 +80,6 @@ public class QuizMgr : MonoBehaviour
        
     }
 
-    public void ReStartQuiz()
-    {
-        User.Instance.correctCount = 0;
-        User.Instance.myScore = 0;
-        StartQuiz();
-    }
-  
    IEnumerator WaitNextQuiz()
     {
         yield return new WaitForSeconds(0.5f);
@@ -84,9 +87,8 @@ public class QuizMgr : MonoBehaviour
     }
     IEnumerator WaitQuizStart()
     {
-        popup.SetReadyPanel(false);
-        popup.SetGameOverPanel(false);
-        popup.SetResultPanel(false);
+        InitQuiz();
+       
         isAnswered = false;
         yield return new WaitForSeconds(0.5f);
         QuizRandom();
@@ -131,11 +133,11 @@ public class QuizMgr : MonoBehaviour
             User.Instance.correctCount++;
             SoundMgr.Instance.PlaySound(SFXType.rigjt);
 
-            Debug.Log("정답");
+            //Debug.Log("정답");
         }
         else
         {
-            Debug.Log("땡");
+            //Debug.Log("땡");
             SoundMgr.Instance.PlaySound(SFXType.wrong);
 
         }
@@ -147,18 +149,7 @@ public class QuizMgr : MonoBehaviour
     {
         quizCanvas.Answered(_result);
     }
-    public void SetGameStop()
-    {
-        if (Time.timeScale > 0)
-        {
-            beforeTime = Time.timeScale;
-            Time.timeScale = 0;
-        }
-        else
-        {
-            Time.timeScale = beforeTime;
-        }
-    }
+    
 
    
 }

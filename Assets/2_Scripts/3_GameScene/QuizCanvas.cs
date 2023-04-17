@@ -9,8 +9,7 @@ public class QuizCanvas : MonoBehaviour
 {
     [SerializeField] QuizTimePanel quizTimePanel;
 
-    List<AnswerObject> answerObjectList = new List<AnswerObject>();
-
+    public  List<AnswerObject> answerObjectList = new List<AnswerObject>();
 
     [SerializeField] Image questionImage;
     [SerializeField] GameObject answerObjectPrefab;
@@ -19,16 +18,19 @@ public class QuizCanvas : MonoBehaviour
     [SerializeField] WordBtn[] wordBtns;
     [SerializeField] TMP_Text[] wordText;
 
-    int answerIdx = 0;
+    [SerializeField] AnswerObject answerObject;
+
+    public  int answerIdx = 0;
     bool isClicked = false;
 
+    [SerializeField] public char[] correctArr;
 
     //퀴즈 보여주기
     public void CreatQuiz(QuizData qData) //
     {
         answerIdx = 0;
 
-        for (int i = 0; i < answerObjectList.Count; i++)  
+        for (int i = 0; i < answerObjectList.Count; i++)
         {
             //answerObjectList[i].SetAnswer("");
             AnswerObject aObject = answerObjectList[i];
@@ -38,7 +40,7 @@ public class QuizCanvas : MonoBehaviour
         }
 
         // 정답단어 복사해서 넣기
-        char[] correctArr = qData.correct.ToCharArray();
+        correctArr = qData.correct.ToCharArray();
         for (int i = 0; i < correctArr.Length; i++)
         {
             AnswerObject cloneAnswerObject = Instantiate(answerObjectPrefab, answerObjectTr).GetComponent<AnswerObject>();
@@ -46,26 +48,47 @@ public class QuizCanvas : MonoBehaviour
             cloneAnswerObject.SetAnswer("");
         }
         questionImage.sprite = qData.sprite; // 퀴즈 이미지 //
-        //questionImage.sprite = qData.quizImage; // 퀴즈 이미지 //
 
         // 문제단어 제출하기
-        //List<string> wordList = new List<string>();
-        List<string> wordList = new List<string>();
-        List<char> correct = new List<char>();
 
-        wordList.AddRange(DataMgr.Instance.words);
-        correct.AddRange(correctArr);
-       
-        int idx = 0;
+        List<char> wordList = new List<char>();
+        wordList.AddRange(correctArr);
+
+        int insertCount = 12 - correctArr.Length;
+
+        List<char> randomList = new List<char>();
+        randomList.AddRange(DataMgr.Instance.words);
+
+
+        for (int i = 0; i < insertCount; i++)
+        {
+            char randomChar = randomList[Random.Range(0, randomList.Count)];
+            wordList.Add(randomChar);
+            randomList.Remove(randomChar);
+            //if (wordList[i] == randomList[i]) // 글자가 같으면 빼기
+            //{
+            //    randomList.RemoveAt(i);
+            //    i--;
+            //}
+        }
+
+        //랜덤으로 만들기
+        List<char> wordRandList = new List<char>();
+        wordRandList.AddRange(wordList);
+
+        for (int i = 0; i < wordList.Count; i++)
+        {
+            char rand = wordList[Random.Range(0, wordRandList.Count)];
+            wordRandList.Add(rand);
+            wordRandList.Remove(rand);
+        }
+
+        wordList = wordRandList;
+
         for (int i = 0; i < wordBtns.Length; i++)
         {
-            //int rand = Random.Range(0, correct.Count);
-            wordBtns[idx].SetWordBtn(correct[idx]);
-            //wordBtns[idx].SetWordBtn(wordList[rand]);
-            //wordList.Remove(wordList[rand]);
-            //correct.Remove(correct[rand]);
-            //i--; // 인덱스의 역활??
-            idx++;
+
+            wordBtns[i].SetWordBtn(wordList[i]);
         }
         #region 문제원본
         //wordList.AddRange(qData.words);
@@ -79,11 +102,7 @@ public class QuizCanvas : MonoBehaviour
         //}
         #endregion
 
-
-
     }
-
-
 
     // 퀴즈 시간 
     public void Answered(bool _b)
@@ -92,13 +111,14 @@ public class QuizCanvas : MonoBehaviour
     }
 
     // 정답 버튼을 누르기
-    public void OnClickedWord(string answerWord) 
+    public void OnClickedWord(string answerWord)
     {
         if (isClicked)
         {
             return;
         }
         SoundMgr.Instance.PlaySound(SFXType.click);
+      
         answerObjectList[answerIdx].SetAnswer(answerWord);
 
         answerIdx++;
@@ -126,7 +146,9 @@ public class QuizCanvas : MonoBehaviour
             answerObjectList[i].SetAnswer("");
         }
         answerIdx = 0;
-        isClicked=false;
+        isClicked = false;
     }
+
+   
 
 }

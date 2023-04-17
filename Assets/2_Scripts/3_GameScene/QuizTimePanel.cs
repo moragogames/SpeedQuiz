@@ -28,11 +28,11 @@ public class QuizTimePanel : MonoBehaviour
         StopCoroutine("ProgressTimer");
     }
 
-    public void PopUpTimeStop(bool _p)
+    bool isStopTime;
+    public void PopUpTimeStop(bool _t)
     {
-        StopCoroutine("ProgressTimer");
+        isStopTime = _t;
     }
-    
 
 
     //시간안에 퀴즈를 풀면 코루틴 종료
@@ -44,6 +44,12 @@ public class QuizTimePanel : MonoBehaviour
         {
             if (timer <= 0)
                 break; // 타이머가 0이거나 적으면 코루틴 탈출
+            if (isStopTime)
+            {
+                yield return null;
+                continue;
+            }
+
             yield return null; // 한프레임 쉬고
             timer -= Time.deltaTime;  // 시간을 줄여라
             progressBar.fillAmount  = timer / maxTime; // 타이머바 이미지에 타임을 뺌

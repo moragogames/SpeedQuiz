@@ -13,27 +13,29 @@ public class UITop : MonoBehaviour
     //[SerializeField] GameObject BackBtn;
 
     [SerializeField] TMP_Text questionCountText;
-    [SerializeField] TMP_Text heartCountText;
+    [SerializeField] TMP_Text coinCountText;
 
     private void Start()
     {
         
     }
 
+    private void Update()
+    {
+        coinCountText.text = User.Instance.coinCount.ToString();
+    }
+
     public void SetQuestionCount(int _q)
     {
         questionCountText.text = _q.ToString();
     }
-    public void SetheartCountText(int _h)
-    {
-        heartCountText.text = _h.ToString();
-    }
 
+
+
+   
     public void SetUIShop()
     {
         popup.SetShopPanel(true);
-        quizTimePanel.PopUpTimeStop(true);
-
     }
     public void SetBackBtn()
     {

@@ -22,7 +22,7 @@ public class DataMgr : MonoBehaviour
     }
     #endregion
 
-    public string[] words;
+    public char[] words;
     
     public Dictionary<QuizCategoty, List<QuizData>> quizDataDic = new Dictionary<QuizCategoty, List<QuizData>> ();
     public Dictionary<QuizCategoty, QuizMenuData> quizMenuDic = new Dictionary<QuizCategoty, QuizMenuData> ();
@@ -35,7 +35,24 @@ public class DataMgr : MonoBehaviour
 
     private void Start()
     {
-        // 퀴즈데이터
+        // 단어데이터
+        JSONObject wordObj = JSONObject.Parse(Resources.Load<TextAsset>("JSON/WordData").text);
+        string[] wordstr = wordObj.GetString("word").Split('/');
+        words = new char[wordstr.Length]; //궁금합니다
+        for (int i = 0; i < wordstr.Length; i++)
+        {
+            words[i] = char.Parse(wordstr[i]);
+        }
+    }
+
+    bool initQuizData;
+    void LoadQuizData()
+    {
+        if (initQuizData)
+        {
+            return;
+        }
+        initQuizData = true;    
         JSONArray quizArray = JSONArray.Parse(Resources.Load<TextAsset>("JSON/QuizData").text);
 
         for (int i = 0; i < quizArray.Length; i++)
@@ -53,12 +70,19 @@ public class DataMgr : MonoBehaviour
             }
 
             quizDataDic[qData.quizCategoty].Add(qData); // 궁금합니다 
-
+#if UNITY_EDITOR
             quizDataList.Add(qData);
+#endif
         }
-
-
-        // 메뉴데이터
+    }
+    bool initQuizMenuData;
+    void LoadQuizMenuData()
+    {
+        if (initQuizMenuData)
+        {
+            return;
+        }
+        initQuizMenuData = true;
         JSONArray menuArray = JSONArray.Parse(Resources.Load<TextAsset>("JSON/quizMenuData").text);
 
         for (int i = 0; i < menuArray.Length; i++)
@@ -70,28 +94,15 @@ public class DataMgr : MonoBehaviour
             mData.quizCategoty = System.Enum.Parse<QuizCategoty>(menuArray[i].Obj.GetString("quizCategory"));
 
             quizMenuDic.Add(mData.quizCategoty, mData);
-
+#if UNITY_EDITOR
             quizMenuDataList.Add(mData);
+#endif
         }
-
-
-        // 단어데이터
-        JSONArray wordArray = JSONArray.Parse(Resources.Load<TextAsset>("JSON/WordData").text);
-        words = wordArray.ToString().Split('/');
-        //words = wordArray.ToString().Split('/');
-        //for (int i = 0; i < wordArray.Length; i++)
-        //{
-        //    WordData wData = new WordData();
-
-        //    wData.word = wordArray[i].Obj.GetString("word").Split('/');
-
-        //    wordDataList.Add(wData);
-        //}
     }
-
 
     public List<QuizData> GetQuizDatas(QuizCategoty quizCategoty)
     {
+        LoadQuizData();
         if (!quizDataDic.ContainsKey(quizCategoty))
         {
             return null;
@@ -100,6 +111,7 @@ public class DataMgr : MonoBehaviour
     }
     public QuizMenuData GetQuizMenuData(QuizCategoty quizCategoty)
     {
+        LoadQuizMenuData();
 
         if (!quizMenuDic.ContainsKey(quizCategoty))
         {

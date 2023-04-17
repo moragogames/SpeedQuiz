@@ -17,6 +17,7 @@ public class User : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            SaveMgr.GetSaveInt("coinCount", coinCount); // 세이브 로드
         }
 
         else
@@ -34,5 +35,16 @@ public class User : MonoBehaviour
 
     public int correctCount;
     public int myScore;
+
+    public int coinCount;
+
+   
+    private void Start()
+    {
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;// 화면 꺼짐 방지
+        
+
+    }
+
 
 }
