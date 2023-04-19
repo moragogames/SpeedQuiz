@@ -34,7 +34,7 @@ public class SoundMgr : MonoBehaviour
         }
     }
 
-    public void PlaySound(SFXType _sType)
+    public void PlaySound(SFXType _sType) // »ç¿îµåÀç»ý
     {
         SoundData _sData = GetSoundData(_sType);
 
@@ -47,6 +47,20 @@ public class SoundMgr : MonoBehaviour
 
         _aSourse.Play();
     }
+
+    //public void StopSound(SFXType Stoptype) // »ç¿îµå ¸ØÃã
+    //{
+    //    SoundData _sData = GetSoundData(Stoptype);
+
+    //    AudioSource _aStopSourse = GetAudioSourse();
+
+    //    _aStopSourse.clip = _sData.audioClip;
+    //    _aStopSourse.volume = _sData.volume;
+    //    _aStopSourse.loop = _sData.loop;
+    //    _aStopSourse.playOnAwake = _sData.playOnAwake;
+
+    //    _aStopSourse.Stop();
+    //}
 
     SoundData GetSoundData(SFXType _sType)
     {
@@ -79,7 +93,8 @@ public enum SFXType
     click,
     wrong,
     rigjt,
-    menu
+    menu,
+    clock
 }
 
 

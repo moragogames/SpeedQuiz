@@ -63,13 +63,14 @@ public class QuizCanvas : MonoBehaviour
         for (int i = 0; i < insertCount; i++)
         {
             char randomChar = randomList[Random.Range(0, randomList.Count)];
+            if (wordList.Contains(randomChar))
+            {
+                i--;
+                continue;
+            }
             wordList.Add(randomChar);
             randomList.Remove(randomChar);
-            //if (wordList[i] == randomList[i]) // 글자가 같으면 빼기
-            //{
-            //    randomList.RemoveAt(i);
-            //    i--;
-            //}
+            
         }
 
         //랜덤으로 만들기
@@ -118,7 +119,6 @@ public class QuizCanvas : MonoBehaviour
             return;
         }
         SoundMgr.Instance.PlaySound(SFXType.click);
-      
         answerObjectList[answerIdx].SetAnswer(answerWord);
 
         answerIdx++;
@@ -141,14 +141,22 @@ public class QuizCanvas : MonoBehaviour
     {
         yield return new WaitForSeconds(0.3f);
 
+        OnClickedRemove();
+        isClicked = false;
+    }
+
+    public void OnClickedRemove()
+    {
         for (int i = 0; i < answerObjectList.Count; i++)
         {
             answerObjectList[i].SetAnswer("");
         }
         answerIdx = 0;
-        isClicked = false;
     }
 
-   
+    public void CoinUp()
+    {
+        User.Instance.coinCount++;
+    }
 
 }

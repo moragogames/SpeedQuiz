@@ -31,4 +31,6 @@ public class WordBtn : MonoBehaviour
     {
         QuizMgr.Instance.quizCanvas.OnClickedWord(word.ToString());
     }
+
+   
 }

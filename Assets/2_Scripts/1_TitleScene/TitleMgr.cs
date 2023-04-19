@@ -6,15 +6,16 @@ using UnityEngine.SceneManagement;
 public class TitleMgr : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    [SerializeField] GameObject optionObj;
+
+    public void ClickOption()
     {
-        
+        optionObj.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ClickClose()
     {
-        
+        optionObj.SetActive(false);
     }
 
     public void ClickStartBtn()

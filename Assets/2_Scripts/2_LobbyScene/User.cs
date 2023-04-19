@@ -17,7 +17,7 @@ public class User : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
-            SaveMgr.GetSaveInt("coinCount", coinCount); // 세이브 로드
+            
         }
 
         else
@@ -36,15 +36,37 @@ public class User : MonoBehaviour
     public int correctCount;
     public int myScore;
 
-    public int coinCount;
+    public int _coinCount;
+    public int coinCount
+    {
+        get { return _coinCount; }
+        set
+        {
+            _coinCount = value;
+            SaveMgr.SetSaveInt("coinCount", _coinCount);
+        }
+    }
+
 
    
     private void Start()
     {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;// 화면 꺼짐 방지
-        
+        Application.targetFrameRate = 60;
+        coinCount = SaveMgr.GetSaveInt("coinCount", coinCount); // 세이브 로드
 
     }
 
+    private void Update()
+    {
+        if (Application.platform == RuntimePlatform.Android)
+
+        {
+            if (Input.GetKey(KeyCode.Escape))
+            {
+                Application.Quit();
+            }
+        }
+    }
 
 }

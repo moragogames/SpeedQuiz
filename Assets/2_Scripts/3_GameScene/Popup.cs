@@ -61,11 +61,14 @@ public class Popup : MonoBehaviour
     {
         panelBack.SetActive(true);
         resultPanel.SetActive(_r);
+        SoundMgr.Instance.PlaySound(SFXType.menu);
     }
     public void SetGameOverPanel(bool _g)
     {
         panelBack.SetActive(true);
         gameOverPanel.SetActive(_g);
+        SoundMgr.Instance.PlaySound(SFXType.menu);
+
     }
     public void SetShopPanel(bool _s)
     {
@@ -93,7 +96,7 @@ public class Popup : MonoBehaviour
             hintOnePanel.SetActive(true);
             quizTimePanel.PopUpTimeStop(true);
             oneHint.text = quizCanvas.correctArr[0].ToString();
-            SaveMgr.SetSaveInt("coinCount", User.Instance.coinCount); // 세이브
+            //SaveMgr.SetSaveInt("coinCount", User.Instance.coinCount); // 세이브
             Debug.Log("세이브완료");
         }
         else
@@ -124,8 +127,6 @@ public class Popup : MonoBehaviour
             
             string correct = new string(quizCanvas.correctArr); // char string 변환
             allHint.text = correct.ToString();
-
-
 
         }
         else

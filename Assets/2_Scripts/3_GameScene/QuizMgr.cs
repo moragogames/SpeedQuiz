@@ -149,9 +149,9 @@ public class QuizMgr : MonoBehaviour
     {
         quizCanvas.Answered(_result);
     }
+
     
 
-   
 }
 
 //[System.Serializable]

@@ -26,7 +26,7 @@ public class QuizMenuBtn : MonoBehaviour
     }
     public void OnClickedBtn()
     {
-        SoundMgr.Instance.PlaySound(SFXType.menu);
+        SoundMgr.Instance.PlaySound(SFXType.click);
         User.Instance.quizCatagoty = quizCategoty;
         SceneManager.LoadScene("3_GameScene");
     }

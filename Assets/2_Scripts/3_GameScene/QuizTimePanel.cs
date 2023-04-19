@@ -34,7 +34,7 @@ public class QuizTimePanel : MonoBehaviour
         isStopTime = _t;
     }
 
-
+    bool isSoundCheck;
     //시간안에 퀴즈를 풀면 코루틴 종료
     IEnumerator ProgressTimer()
     {
@@ -49,14 +49,27 @@ public class QuizTimePanel : MonoBehaviour
                 yield return null;
                 continue;
             }
-
+            if (isSoundCheck)
+            {
+                yield return null;
+            }
+            else
+            {
+                if (progressBar.fillAmount < 0.25)
+                {
+                    SoundMgr.Instance.PlaySound(SFXType.clock);
+                    isSoundCheck = true;
+                }
+            }
             yield return null; // 한프레임 쉬고
             timer -= Time.deltaTime;  // 시간을 줄여라
             progressBar.fillAmount  = timer / maxTime; // 타이머바 이미지에 타임을 뺌
         }
         progressBar.fillAmount = 0; // 
+        //SoundMgr.Instance.StopSound(SFXType.clock); // 사운드 스탑|(안됨)
         QuizMgr.Instance.TimeOver(); // 
         popup.SetGameOverPanel(true);
+        isSoundCheck = false;
     }
 
     
