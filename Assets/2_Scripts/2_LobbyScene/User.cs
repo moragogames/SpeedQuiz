@@ -36,14 +36,14 @@ public class User : MonoBehaviour
     public int correctCount;
     public int myScore;
 
-    public int _coinCount;
-    public int coinCount
+    public int _myCoin;
+    public int myCoin
     {
-        get { return _coinCount; }
+        get { return _myCoin; }
         set
         {
-            _coinCount = value;
-            SaveMgr.SetSaveInt("coinCount", _coinCount);
+            _myCoin = value;
+            SaveMgr.SetSaveInt("coinCount", _myCoin);
         }
     }
 
@@ -53,7 +53,7 @@ public class User : MonoBehaviour
     {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;// 화면 꺼짐 방지
         Application.targetFrameRate = 60;
-        coinCount = SaveMgr.GetSaveInt("coinCount", coinCount); // 세이브 로드
+        myCoin = SaveMgr.GetSaveInt("coinCount", myCoin); // 세이브 로드
 
     }
 

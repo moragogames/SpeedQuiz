@@ -39,7 +39,7 @@ public class Popup : MonoBehaviour
     private void Update()
     {
         myScoreText.text = "³ªÀÇ Á¡¼ö : " + User.Instance.myScore.ToString();
-        correctCount.text = "¸ÂÃáÄûÁî°¹¼ö : " + User.Instance.correctCount.ToString();
+        correctCount.text = "¸ÂÃá ÄûÁî °³¼ö : " + User.Instance.correctCount.ToString();
     }
     
     public void InitPopup()
@@ -85,9 +85,9 @@ public class Popup : MonoBehaviour
         {
             return;
         }
-        if (User.Instance.coinCount > 0)
+        if (User.Instance.myCoin > 0)
         {
-            User.Instance.coinCount -= 1;
+            User.Instance.myCoin -= 1;
 
             isHintOneClicked = true;
 
@@ -115,9 +115,9 @@ public class Popup : MonoBehaviour
         }
 
 
-        if (User.Instance.coinCount >= 3)
+        if (User.Instance.myCoin >= 3)
         {
-            User.Instance.coinCount -= 3;
+            User.Instance.myCoin -= 3;
 
             isHintAllClicked = true;
             SoundMgr.Instance.PlaySound(SFXType.menu);
@@ -150,6 +150,7 @@ public class Popup : MonoBehaviour
     {
         InitPopup();
         quizTimePanel.PopUpTimeStop(false);
+        adPanel.SetActive(false);
 
     }
 
@@ -160,6 +161,21 @@ public class Popup : MonoBehaviour
         quizTimePanel.PopUpTimeStop(true);
         adPanel.SetActive(true);
 
+    }
+
+    public void OnClickedAdBtn()
+    {
+        AdsMgr.Instance.ShowAd(AdUnitType.RV, (b) => {
+
+            if (b)
+            {
+                User.Instance.myCoin += 5; 
+            }
+            else
+            {
+
+            }
+        });
     }
 
 }

@@ -948,7 +948,7 @@ MonoBehaviour:
   quizCatagoty: 0
   correctCount: 0
   myScore: 0
-  _coinCount: 10
+  _myCoin: 5
 --- !u!4 &601507918
 Transform:
   m_ObjectHideFlags: 0

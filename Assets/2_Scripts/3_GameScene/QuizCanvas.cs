@@ -156,7 +156,7 @@ public class QuizCanvas : MonoBehaviour
 
     public void CoinUp()
     {
-        User.Instance.coinCount++;
+        User.Instance.myCoin++;
     }
 
 }

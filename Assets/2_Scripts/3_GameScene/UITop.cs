@@ -22,7 +22,7 @@ public class UITop : MonoBehaviour
 
     private void Update()
     {
-        coinCountText.text = User.Instance.coinCount.ToString();
+        coinCountText.text = User.Instance.myCoin.ToString();
     }
 
     public void SetQuestionCount(int _q)
