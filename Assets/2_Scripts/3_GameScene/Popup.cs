@@ -169,7 +169,7 @@ public class Popup : MonoBehaviour
 
             if (b)
             {
-                User.Instance.myCoin += 5; 
+                User.Instance.myCoin += 5;
             }
             else
             {

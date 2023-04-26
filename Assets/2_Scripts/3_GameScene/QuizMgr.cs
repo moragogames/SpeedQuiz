@@ -127,6 +127,7 @@ public class QuizMgr : MonoBehaviour
         
         if (curQuizData.correct == correctWord) // 정답이 같으면
         {
+            SoundMgr.Instance.StopSound(SFXType.clock);
             popup.SetResultPanel(true); // 결과 팝업
             quizCanvas.Answered(result); // 
             User.Instance.myScore += 100;

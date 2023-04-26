@@ -48,19 +48,29 @@ public class SoundMgr : MonoBehaviour
         _aSourse.Play();
     }
 
-    //public void StopSound(SFXType Stoptype) // »ç¿îµå ¸ØÃã
-    //{
-    //    SoundData _sData = GetSoundData(Stoptype);
+    public void StopSound(SFXType stoptype) // »ç¿îµå ¸ØÃã
+    {
+        SoundData _sData = GetSoundData(stoptype);
 
-    //    AudioSource _aStopSourse = GetAudioSourse();
+        for (int i = 0; i < audioSources.Length; i++)
+        {
+            if (!audioSources[i].isPlaying)
+            {
+                continue;
+            }
+            if (audioSources[i].clip == null)
+            {
+                continue;
+            }
 
-    //    _aStopSourse.clip = _sData.audioClip;
-    //    _aStopSourse.volume = _sData.volume;
-    //    _aStopSourse.loop = _sData.loop;
-    //    _aStopSourse.playOnAwake = _sData.playOnAwake;
-
-    //    _aStopSourse.Stop();
-    //}
+            if (audioSources[i].clip == _sData.audioClip)
+            {
+                audioSources[i].Stop();
+            }
+            
+        }
+       
+    }
 
     SoundData GetSoundData(SFXType _sType)
     {

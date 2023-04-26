@@ -1740,7 +1740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8a88739a9dd106418d803e1a623b0a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _testMode: 1
+  _testMode: 0
   ISAdUnitId: Interstitial_Android
   RVAdUnitId: Rewarded_Android
 --- !u!4 &1030886457

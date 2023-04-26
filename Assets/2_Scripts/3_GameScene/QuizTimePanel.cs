@@ -34,7 +34,7 @@ public class QuizTimePanel : MonoBehaviour
         isStopTime = _t;
     }
 
-    bool isSoundCheck;
+    bool isSoundCheck = false;
     //시간안에 퀴즈를 풀면 코루틴 종료
     IEnumerator ProgressTimer()
     {
@@ -55,7 +55,7 @@ public class QuizTimePanel : MonoBehaviour
             }
             else
             {
-                if (progressBar.fillAmount < 0.25)
+                if (progressBar.fillAmount < 0.25 && !isSoundCheck)
                 {
                     SoundMgr.Instance.PlaySound(SFXType.clock);
                     isSoundCheck = true;
@@ -66,7 +66,7 @@ public class QuizTimePanel : MonoBehaviour
             progressBar.fillAmount  = timer / maxTime; // 타이머바 이미지에 타임을 뺌
         }
         progressBar.fillAmount = 0; // 
-        //SoundMgr.Instance.StopSound(SFXType.clock); // 사운드 스탑|(안됨)
+        SoundMgr.Instance.StopSound(SFXType.clock); // 사운드 스탑|(안됨)
         QuizMgr.Instance.TimeOver(); // 
         popup.SetGameOverPanel(true);
         isSoundCheck = false;
