@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SoundMgr : MonoBehaviour
 {
@@ -20,9 +21,11 @@ public class SoundMgr : MonoBehaviour
         }
     }
     #endregion
+   
 
     [SerializeField] SoundData[] soundDatas;
     [SerializeField] AudioSource[] audioSources;
+
 
     private void Start()
     {
@@ -96,6 +99,9 @@ public class SoundMgr : MonoBehaviour
         }
         return audioSources[0];
     }
+
+   
+
 }
 
 public enum SFXType

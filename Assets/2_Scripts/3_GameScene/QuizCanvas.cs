@@ -32,6 +32,7 @@ public class QuizCanvas : MonoBehaviour
 
         for (int i = 0; i < answerObjectList.Count; i++)
         {
+            //Debug.Log(answerObjectList.Count);
             //answerObjectList[i].SetAnswer("");
             AnswerObject aObject = answerObjectList[i];
             answerObjectList.Remove(aObject);
@@ -153,10 +154,12 @@ public class QuizCanvas : MonoBehaviour
         }
         answerIdx = 0;
     }
-
-    public void CoinUp()
+#if UNITY_EDITOR
+    public void Clear()
     {
-        User.Instance.myCoin++;
+        PlayerPrefs.DeleteAll();
+        Debug.Log("데이터삭제");
     }
+#endif
 
 }

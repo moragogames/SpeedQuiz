@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5554095936305915623
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5554095936305915617}
+  - component: {fileID: 5554095936305915616}
+  m_Layer: 0
+  m_Name: SoundMgr
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5554095936305915617
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5554095936305915623}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5554095936305915616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5554095936305915623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a726b724d74d63344acc43ba85d0638b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundDatas:
+  - sfxType: 0
+    audioClip: {fileID: 8300000, guid: 282bd4a3f625c8549bc9d7ce4e43df01, type: 3}
+    volume: 1
+    loop: 0
+    playOnAwake: 0
+  - sfxType: 1
+    audioClip: {fileID: 8300000, guid: b6aa3c34a4b41414e8c4fab8401e811c, type: 3}
+    volume: 0.3
+    loop: 0
+    playOnAwake: 0
+  - sfxType: 2
+    audioClip: {fileID: 8300000, guid: 13c9c5e124c087f4ea038f86b3f56f39, type: 3}
+    volume: 0.3
+    loop: 0
+    playOnAwake: 0
+  - sfxType: 3
+    audioClip: {fileID: 8300000, guid: 4ef395dc24bb95c458b9c52cf6174e25, type: 3}
+    volume: 1
+    loop: 0
+    playOnAwake: 0
+  - sfxType: 4
+    audioClip: {fileID: 8300000, guid: 92ecf3168d5f8d24d8819cc0ed804e4f, type: 3}
+    volume: 0.5
+    loop: 0
+    playOnAwake: 0
+  audioSources: []

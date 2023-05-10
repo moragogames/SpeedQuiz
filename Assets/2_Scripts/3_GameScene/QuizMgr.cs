@@ -44,6 +44,10 @@ public class QuizMgr : MonoBehaviour
 
         User.Instance.correctCount = 0;
         User.Instance.myScore = 0;
+        for (int i = 0; i < quizDatas.Length; i++)
+        {
+            Debug.Log(quizDatas[i].correct);
+        }
         quizDatas = DataMgr.Instance.GetQuizDatas(User.Instance.quizCatagoty).ToArray();
         SetQuizList();
     }
@@ -54,6 +58,8 @@ public class QuizMgr : MonoBehaviour
         popup.SetGameOverPanel(false);
         popup.SetResultPanel(false);
         popup.panelBack.SetActive(false);
+        popup.hintOneObj.GetComponent<Image>().color = Color.white;
+        popup.hintAllObj.GetComponent<Image>().color = Color.white;
     }
     private void Update()
     {
@@ -88,7 +94,6 @@ public class QuizMgr : MonoBehaviour
     IEnumerator WaitQuizStart()
     {
         InitQuiz();
-       
         isAnswered = false;
         yield return new WaitForSeconds(0.5f);
         QuizRandom();
@@ -104,9 +109,11 @@ public class QuizMgr : MonoBehaviour
         curQuizData = quizRandomList[rand];
         quizRandomList.RemoveAt(rand);
 
-        if (quizRandomList.Count == 0)
+        if (quizRandomList.Count == 0) // 한문제가 넘겨짐
         {
-            SetQuizList();
+            SceneManager.LoadScene("4_ClearScene");
+            Debug.Log("퀴즈 다풀었당");
+            //SetQuizList();
         }
     }
     public void SetQuizList()

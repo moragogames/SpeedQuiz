@@ -17,7 +17,7 @@ public class QuizTimePanel : MonoBehaviour
     //퀴즈를 제출할때 호출
     public void QuizTimerStart()
     {
-        
+
         progressBar.fillAmount = 1;
         StartCoroutine("ProgressTimer");
     }
@@ -34,11 +34,12 @@ public class QuizTimePanel : MonoBehaviour
         isStopTime = _t;
     }
 
-    bool isSoundCheck = false;
+    [SerializeField] bool isSoundCheck = false;
     //시간안에 퀴즈를 풀면 코루틴 종료
     IEnumerator ProgressTimer()
     {
         float timer = maxTime; // 5초
+        isSoundCheck = false;
 
         while (true)
         {
@@ -49,30 +50,25 @@ public class QuizTimePanel : MonoBehaviour
                 yield return null;
                 continue;
             }
-            if (isSoundCheck)
+            if (progressBar.fillAmount < 0.3 && !isSoundCheck)
             {
-                yield return null;
+                Debug.Log("짹각짹깍");
+                SoundMgr.Instance.PlaySound(SFXType.clock);
+                isSoundCheck = true;
             }
-            else
-            {
-                if (progressBar.fillAmount < 0.25 && !isSoundCheck)
-                {
-                    SoundMgr.Instance.PlaySound(SFXType.clock);
-                    isSoundCheck = true;
-                }
-            }
+
             yield return null; // 한프레임 쉬고
             timer -= Time.deltaTime;  // 시간을 줄여라
-            progressBar.fillAmount  = timer / maxTime; // 타이머바 이미지에 타임을 뺌
+            progressBar.fillAmount = timer / maxTime; // 타이머바 이미지에 타임을 뺌
         }
-        progressBar.fillAmount = 0; // 
+        Debug.Log("짹깍false");
+        progressBar.fillAmount = 0; 
         SoundMgr.Instance.StopSound(SFXType.clock); // 사운드 스탑|(안됨)
-        QuizMgr.Instance.TimeOver(); // 
         popup.SetGameOverPanel(true);
-        isSoundCheck = false;
+        QuizMgr.Instance.TimeOver(); 
     }
 
-    
+
 
 
 

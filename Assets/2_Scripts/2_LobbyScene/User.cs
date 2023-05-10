@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class User : MonoBehaviour
 {
@@ -56,7 +57,6 @@ public class User : MonoBehaviour
         myCoin = SaveMgr.GetSaveInt("coinCount", myCoin); // 세이브 로드
 
     }
-
     private void Update()
     {
         if (Application.platform == RuntimePlatform.Android)
@@ -68,5 +68,7 @@ public class User : MonoBehaviour
             }
         }
     }
+
+
 
 }

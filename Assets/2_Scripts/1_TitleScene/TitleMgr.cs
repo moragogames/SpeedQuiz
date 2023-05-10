@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TitleMgr : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] GameObject optionObj;
+
+    
 
     public void ClickOption()
     {
@@ -22,4 +25,8 @@ public class TitleMgr : MonoBehaviour
     {
         SceneManager.LoadScene("2_LobbyScene");
     }
+    
+    
+
+    
 }

@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Popup : MonoBehaviour
 {
@@ -14,6 +14,11 @@ public class Popup : MonoBehaviour
     [SerializeField] public GameObject shopPanel;
     [SerializeField] public GameObject hintOnePanel;
     [SerializeField] public GameObject hintAllPanel;
+    [SerializeField] public GameObject hintOneObj;
+    [SerializeField] public GameObject hintAllObj;
+
+    [SerializeField] TMP_Text correctText;
+
     [SerializeField] public GameObject readyPanel;
     [SerializeField] public GameObject adPanel;
 
@@ -38,8 +43,8 @@ public class Popup : MonoBehaviour
 
     private void Update()
     {
-        myScoreText.text = "³ªÀÇ Á¡¼ö : " + User.Instance.myScore.ToString();
-        correctCount.text = "¸ÂÃá ÄûÁî °³¼ö : " + User.Instance.correctCount.ToString();
+        myScoreText.text = "Á¡¼ö : " + User.Instance.myScore.ToString();
+        correctCount.text = "¸ÂÃá °¹¼ö : " + User.Instance.correctCount.ToString();
     }
     
     public void InitPopup()
@@ -54,6 +59,7 @@ public class Popup : MonoBehaviour
         hintOnePanel.SetActive(false);
         hintAllPanel.SetActive(false);
         adPanel.SetActive(false);
+
         
     }
 
@@ -63,13 +69,14 @@ public class Popup : MonoBehaviour
         resultPanel.SetActive(_r);
         SoundMgr.Instance.PlaySound(SFXType.menu);
     }
-    public void SetGameOverPanel(bool _g)
+    public void SetGameOverPanel(bool _g) // °ÔÀÓ¿À¹ö
     {
         panelBack.SetActive(true);
         gameOverPanel.SetActive(_g);
         SoundMgr.Instance.PlaySound(SFXType.menu);
-
     }
+
+   
     public void SetShopPanel(bool _s)
     {
         panelBack.SetActive(true);
@@ -92,6 +99,8 @@ public class Popup : MonoBehaviour
             isHintOneClicked = true;
 
             SoundMgr.Instance.PlaySound(SFXType.menu);
+
+            hintOneObj.GetComponent<Image>().color = new Color32(154, 154, 154, 255);
             panelBack.SetActive(true);
             hintOnePanel.SetActive(true);
             quizTimePanel.PopUpTimeStop(true);
@@ -120,6 +129,7 @@ public class Popup : MonoBehaviour
             User.Instance.myCoin -= 3;
 
             isHintAllClicked = true;
+            hintAllObj.GetComponent<Image>().color = new Color32(154, 154, 154, 255);
             SoundMgr.Instance.PlaySound(SFXType.menu);
             panelBack.SetActive(true);
             hintAllPanel.SetActive(true);
@@ -161,6 +171,21 @@ public class Popup : MonoBehaviour
         quizTimePanel.PopUpTimeStop(true);
         adPanel.SetActive(true);
 
+    }
+
+    public void ClickCorrect()
+    {
+        AdsMgr.Instance.ShowAd(AdUnitType.RV, (b) => {
+
+            if (b)
+            {
+                string correct = new string(quizCanvas.correctArr);
+                correctText.text = correct.ToString();
+            }
+           
+        });
+
+        
     }
 
     public void OnClickedAdBtn()

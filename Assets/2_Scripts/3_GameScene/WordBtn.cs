@@ -7,13 +7,13 @@ using UnityEngine.UI;
 public class WordBtn : MonoBehaviour
 {
     TMP_Text wordText;
-    Button Wordbtn;
+    Button wordbtn;
 
     private void Start()
     {
         wordText = GetComponentInChildren<TMP_Text>();
-        Wordbtn = GetComponentInChildren<Button>();
-        Wordbtn.onClick.AddListener(OnClickedWordBtn);
+        wordbtn = GetComponentInChildren<Button>();
+        wordbtn.onClick.AddListener(OnClickedWordBtn);
     }
     char word;
     //public void SetWordBtn(string _w)
@@ -30,6 +30,7 @@ public class WordBtn : MonoBehaviour
     public void OnClickedWordBtn()
     {
         QuizMgr.Instance.quizCanvas.OnClickedWord(word.ToString());
+       // this.gameObject.GetComponent<Image>().color = new Color32(154, 154, 154, 255);
     }
 
    
